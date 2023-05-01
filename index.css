@@ -1,38 +1,182 @@
-
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px;
-    border: 1px solid black;
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
+/* create global variable with :root selector */
+:root {
+  --header-bg-color: rgb(1, 163, 144);
+  --footer-bg-color: rgb(1, 163, 144);
+  --text-color: #000;
+  --light-green: #00ad1d;
+  --dark-green: #016034;
+  --orange: #d97919;
+  --light-red: rgb(236, 56, 56);
+}
+
+/* Header CSS */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  background-color: var(--header-bg-color);
+  border-radius: 5px;
+  box-shadow: -1px 4px 20px 14px rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
+  font-weight: bold;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  z-index: 999;
+  overflow-y: hidden;
+}
+
+.header .logo {
+  padding: 10px 0 10px 15px;
+  width: 100px;
+}
+
+/* nav items CSS */
 .nav-items > ul{
-    list-style-type: none;
-    display: flex;
+  list-style-type: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
 } 
 
 .nav-items > ul > li{
-    padding: 10px;
+  padding: 10px;
+  font-size: large;
+  cursor: pointer;
 } 
 
-.logo {
-    width: 100px;
+.nav-items > ul > li .logout-btn,
+.nav-items > ul > li .login-btn {
+  color: black;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  margin-right: 15px;
+}
+
+.nav-items > ul > li .logout-btn {
+  background-color: var(--orange);
+}
+
+.nav-items > ul > li .login-btn {
+  background-color: var(--light-red);
+}
+
+/* Body CSS */
+
+/* search container CSS */
+.search-container {
+  margin: 100px auto 20px;
+  text-align: center;
+  max-width: 100%;
+  position: relative;
+}
+
+.search-container .search-input {
+  width: 40%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  padding: 14px 15px 14px 20px;
+  border: 1px solid #aabcca;
+  border-right: 0;
+  color: #000000;
+  outline: none;
+}
+
+.search-container .search-btn {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #0768b3;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+  color: #ffffff;
+  padding: 15px 22px;
+  margin-left: -4px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.search-container .search-btn:hover {
+  background-color: #016034;
+}
+
+/* error message css */
+.error-container {
+  text-align: center;
+  font-size: large;
+  margin: 20px 0;
+}
+
+/* .restaurant-list {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+} */
+
+.restraunt-list {
+  display: grid;
+  grid-template-columns: repeat(5, 2fr);
 }
 
 .card {
-    width: 200px;
-    border: 1px dashed blue;
-    padding: 10px 10px;
-    margin: 10px;
+  width: 240px;
+  border-radius: 5px;
+  box-shadow: -1px 5px 10px 5px rgba(42, 42, 42, 0.2);
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
 }
 
-.card-img {
-    width: 100%;
+.card:hover {
+  transform: scale(1.05);
 }
 
-.restraunt-list {
-    display: grid;
-    grid-template-columns: repeat(5, 2fr);
+.card > img {
+  width: 100%;
+  border-radius: 10px;
 }
+
+.card > h5 {
+  font-weight: lighter;
+}
+
+.card > span {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.card > span > h4 {
+  font-weight: bolder;
+  font-size: 12px;
+  padding: 0 2px 0;
+  margin-top: 10px;
+}
+
+.card > span > h4:first-child {
+  display: flex;
+  align-items: center;
+  background-color: var(--light-green);
+  border-radius: 5px;
+  color: white;
+  padding: 5px;
+  margin-top: 5px;
+}
+
 

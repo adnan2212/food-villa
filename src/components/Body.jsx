@@ -1,21 +1,28 @@
 import { useState, useEffect } from "react";
 
 import RestrauntCard from "./RestrauntCard";
-import { restrauntData } from "../config";
+import { restrauntData, swiggy_api_url } from "../config";
+import Shimmer from "./shimmer";
 
 function filterData(searchText, restraunts) {
   return restraunts.filter((restraunt) =>
-    restraunt.data.name.includes(searchText)
+    restraunt?.data?.name.toLowerCase().includes(searchText.toLowerCase())
   );
 }
 
 const Body = () => {
-  const [restraunts, setRestraunts] = useState([]);
+  const [allRestraunts, setAllRestraunts] = useState([]);
+  const [filteredRestraunts, setFilteredRestraunts] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onChangeHandler = (e) => {
     e.preventDefault();
     setSearchText(e.target.value);
+  };
+
+  const onClickHandler = () => {
+    searchData(searchText, allRestraunts);
   };
 
   useEffect(() => {
@@ -23,12 +30,33 @@ const Body = () => {
   }, []);
 
   const getRestraunts = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    setRestraunts(json?.data?.cards[2]?.data?.data?.cards);
+    try {
+      const data = await fetch(swiggy_api_url);
+      const json = await data.json();
+      setAllRestraunts(json?.data?.cards[2]?.data?.data?.cards);
+      setFilteredRestraunts(json?.data?.cards[2]?.data?.data?.cards);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  //if search data is empty show error message
+  const searchData = (searchText, restraunts) => {
+    if (searchText !== "") {
+      const data = filterData(searchText, restraunts);
+      setFilteredRestraunts(data);
+      setErrorMessage("");
+      if (data.length === 0) {
+        setErrorMessage("No matches restaurant found!");
+      }
+    } else {
+      setErrorMessage("");
+      setFilteredRestraunts(restraunts);
+    }
+  };
+
+  // not rendered component (Early return)
+  if (!allRestraunts) return null;
 
   return (
     <>
@@ -36,35 +64,62 @@ const Body = () => {
         <input
           type="text"
           className="search-input"
-          placeholder="search"
+          placeholder="Search a restaurant you want..."
           value={searchText}
           onChange={onChangeHandler}
         />
-        <button
-          className="search-button"
-          onClick={() => {
-            const data = filterData(searchText, restraunts);
-            setRestraunts(data);
-          }}
-        >
+        <button className="search-btn" onClick={onClickHandler}>
           Search
         </button>
       </div>
-      <div className="restraunt-list">
-        {restraunts.map((restraunt) => {
-          return <RestrauntCard key={restraunt.data.id} {...restraunt.data} />;
-        })}
+      {errorMessage && <div className="error-container">{errorMessage}</div>}
 
-        {/* <RestrauntCard
+      {filteredRestraunts?.length === 0 ? (
+        <Shimmer />
+      ) : (
+        <div className="restraunt-list">
+          {filteredRestraunts.map((restraunt) => {
+            return (
+              <RestrauntCard key={restraunt.data.id} {...restraunt.data} />
+            );
+          })}
+
+          {/* <RestrauntCard
         cloudinaryImageId={restrauntData[0].data.cloudinaryImageId}
         name={restrauntData[0].data?.name}
         cuisines={restrauntData[0].data?.cuisines.join(", ")}
         avgRating={restrauntData[0].data?.avgRating}
         lastMileTravelString={restrauntData[0].data?.lastMileTravelString}
       /> */}
-      </div>
+        </div>
+      )}
     </>
   );
 };
 
 export default Body;
+
+// return filteredRestraunts.length === 0 ? (
+//   <Shimmer />
+// ) : (
+//   <>
+//     <div className="search-container">
+//       <input
+//         type="text"
+//         className="search-input"
+//         placeholder="search"
+//         value={searchText}
+//         onChange={onChangeHandler}
+//       />
+//       <button className="search-button" onClick={onClickHandler}>
+//         Search
+//       </button>
+//     </div>
+//     <div className="restraunt-list">
+//       {filteredRestraunts.map((restraunt) => {
+//         return <RestrauntCard key={restraunt.data.id} {...restraunt.data} />;
+//       })}
+
+//     </div>
+//   </>
+// );
