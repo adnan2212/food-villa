@@ -1,22 +1,28 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 import Title from "./Title";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const loggedInUser = () => {
-    return true;
-  };
 
   return (
     <div className="header">
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li>
+            <i className="fa-solid fa-cart-shopping"></i>
+          </li>
           <li>
             {isLoggedIn ? (
               <button

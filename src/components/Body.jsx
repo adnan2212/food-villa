@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import RestrauntCard from "./RestrauntCard";
 import { restrauntData, swiggy_api_url } from "../config";
@@ -80,7 +81,13 @@ const Body = () => {
         <div className="restraunt-list">
           {filteredRestraunts.map((restraunt) => {
             return (
-              <RestrauntCard key={restraunt.data.id} {...restraunt.data} />
+              <Link
+                // to={`/restaurant/${restraunt.cards[0]?.card?.card?.info?.id}`}
+                to={`/restaurant/${restraunt.data.id}`}
+                key={restraunt.data.id}
+              >
+                <RestrauntCard {...restraunt.data} />
+              </Link>
             );
           })}
 
