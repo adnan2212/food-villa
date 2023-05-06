@@ -1924,4 +1924,5 @@ export const shimmer_card_unit = 15;
 export const swiggy_api_url =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&page_type=DESKTOP_WEB_LISTING";
 
-export const swiggy_menu_url = "";
+export const swiggy_menu_url =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.0759837&lng=72.8776559&restaurantId=";

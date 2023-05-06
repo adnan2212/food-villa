@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import RestrauntCard from "./RestrauntCard";
 import { restrauntData, swiggy_api_url } from "../config";
 import Shimmer from "./shimmer";
+import useOnline from "../utils/useOnline";
 
 function filterData(searchText, restraunts) {
   return restraunts.filter((restraunt) =>
@@ -56,6 +57,15 @@ const Body = () => {
     }
   };
 
+  const isOnline = useOnline();
+
+  if (!isOnline)
+    return (
+      <h1 style={{ padding: 100 }}>
+        🛑 OFFLINE, PLEASE CHECK YOUR INTERNET CONNECTION!!!
+      </h1>
+    );
+
   // not rendered component (Early return)
   if (!allRestraunts) return null;
 
@@ -105,28 +115,3 @@ const Body = () => {
 };
 
 export default Body;
-
-// return filteredRestraunts.length === 0 ? (
-//   <Shimmer />
-// ) : (
-//   <>
-//     <div className="search-container">
-//       <input
-//         type="text"
-//         className="search-input"
-//         placeholder="search"
-//         value={searchText}
-//         onChange={onChangeHandler}
-//       />
-//       <button className="search-button" onClick={onClickHandler}>
-//         Search
-//       </button>
-//     </div>
-//     <div className="restraunt-list">
-//       {filteredRestraunts.map((restraunt) => {
-//         return <RestrauntCard key={restraunt.data.id} {...restraunt.data} />;
-//       })}
-
-//     </div>
-//   </>
-// );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
@@ -10,6 +10,11 @@ import Contact from "./components/Contact";
 import RestrauntMenu from "./components/RestrauntMenu";
 import Error from "./components/Error";
 import Profile from "./components/Profile";
+import Shimmer from "./components/shimmer";
+// import Instamart from "./components/Instamart";
+
+//lazy loading
+const Instamart = lazy(() => import("./components/Instamart")); //Dynamic Import
 
 const App = () => {
   return (
@@ -48,6 +53,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestrauntMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Instamart />,
+          </Suspense>
+        ),
       },
     ],
   },

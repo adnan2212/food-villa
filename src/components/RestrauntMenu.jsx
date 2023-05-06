@@ -2,23 +2,13 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { IMG_CDN_URL, ITEM_IMG_CDN_URL } from "../config";
 import { MenuShimmer } from "./shimmer";
+import useRestaurnt from "../utils/useRestaurant";
 
 const RestrauntMenu = () => {
-  const [restraunt, setRestraunt] = useState(null);
-  const params = useParams();
-  const { id } = params;
+  // const [restraunt, setRestraunt] = useState(null);
+  const { id } = useParams();
 
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
-
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.0759837&lng=72.8776559&restaurantId=${id}&submitAction=ENTER`
-    );
-    const json = await data.json();
-    setRestraunt(json.data);
-  }
+  const restraunt = useRestaurnt(id);
 
   return !restraunt ? (
     <MenuShimmer />
