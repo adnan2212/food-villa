@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import RestrauntCard from "./RestrauntCard";
@@ -17,6 +17,7 @@ const Body = () => {
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  // const { user, setUser } = useContext(UserContext);
 
   const onChangeHandler = (e) => {
     e.preventDefault();
@@ -79,12 +80,22 @@ const Body = () => {
           value={searchText}
           onChange={onChangeHandler}
         />
+
         <button className="search-btn" onClick={onClickHandler}>
           Search
         </button>
+
+        {/*  <input
+          value={user.email}
+          onChange={(e) => {
+            setUser({
+              ...user,
+              email: e.target.value,
+            });
+          }}
+        /> */}
       </div>
       {errorMessage && <div className="error-container">{errorMessage}</div>}
-
       {filteredRestraunts?.length === 0 ? (
         <Shimmer />
       ) : (

@@ -1,14 +1,21 @@
-import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { IMG_CDN_URL, ITEM_IMG_CDN_URL } from "../config";
 import { MenuShimmer } from "./shimmer";
 import useRestaurnt from "../utils/useRestaurant";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../store/cartSlice";
 
 const RestrauntMenu = () => {
   // const [restraunt, setRestraunt] = useState(null);
   const { id } = useParams();
 
   const restraunt = useRestaurnt(id);
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    dispatch(addItemToCart(item));
+  };
 
   return !restraunt ? (
     <MenuShimmer />
@@ -85,7 +92,13 @@ const RestrauntMenu = () => {
                       alt={item?.card?.info?.name}
                     />
                   )}
-                  <button className="add-btn"> ADD +</button>
+                  <button
+                    className="add-btn"
+                    onClick={() => handleAddItem(item)}
+                  >
+                    {" "}
+                    ADD +
+                  </button>
                 </div>
               </div>
             ))}

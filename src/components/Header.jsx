@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Title from "./Title";
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const cartItems = useSelector((store) => store.cart.cartItems);
+  console.log(cartItems);
 
   return (
     <div className="header">
@@ -23,9 +27,7 @@ const Header = () => {
           <li>
             <Link to="/instamart">Instamart</Link>
           </li>
-          <li>
-            <i className="fa-solid fa-cart-shopping"></i>
-          </li>
+
           <li>
             {isLoggedIn ? (
               <button
@@ -39,6 +41,14 @@ const Header = () => {
                 Login
               </button>
             )}
+          </li>
+          <li>
+            <Link to="/cart">
+              <i className="fa-solid fa-cart-shopping">
+                {" "}
+                - {cartItems.length}{" "}
+              </i>
+            </Link>
           </li>
         </ul>
       </div>

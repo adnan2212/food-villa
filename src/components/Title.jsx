@@ -1,4 +1,5 @@
-import logo from "../assets/img/logo.png";
+// import logo from "../assets/img/logo.png";
+import logo from "../assets/img/SwiggyLogo.webp";
 
 const Title = () => {
   return (

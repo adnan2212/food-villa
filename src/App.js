@@ -1,6 +1,7 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,21 +9,23 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import RestrauntMenu from "./components/RestrauntMenu";
+import Cart from "./components/Cart";
 import Error from "./components/Error";
 import Profile from "./components/Profile";
 import Shimmer from "./components/shimmer";
 // import Instamart from "./components/Instamart";
+import store from "./store/store";
 
 //lazy loading
 const Instamart = lazy(() => import("./components/Instamart")); //Dynamic Import
 
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <Outlet />
       <Footer />
-    </>
+    </Provider>
   );
 };
 
@@ -61,6 +64,10 @@ const appRouter = createBrowserRouter([
             <Instamart />,
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
