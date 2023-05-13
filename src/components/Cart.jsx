@@ -1,67 +1,43 @@
+// import { RemoveCircleOutlineSharp } from "@ricons/material";
+import RemoveCircleOutlineSharp from "@ricons/material/RemoveCircleOutlineSharp";
+import DataArrayOutlined from "@ricons/material/DataArrayOutlined";
+import DeleteForeverFilled from "@ricons/material/DeleteForeverFilled";
 import { useSelector, useDispatch } from "react-redux";
+import { Icon } from "@ricons/utils";
+import { selectCartItems } from "../store/cart.selector";
 
-import FootItem from "./FoodItem";
+import FoodItem from "./FoodItem";
+
 import {
   clearItemFromCart,
   removeItemFromCart,
-  increaseQuantity,
-} from "../store/cartSlice";
+  showCartItems,
+} from "../store/cartReducer";
 
 const Cart = () => {
-  const style = {
-    paddingTop: "100px",
-  };
-
-  const style2 = {
-    display: "flex",
-  };
-
-  const cartItems = useSelector((store) => store.cart.cartItems); // SUBSCRIBING TO THE CART SLICE
+  const cartItems = useSelector((store) => store.cart.cartItems);
 
   const dispatch = useDispatch();
 
   const handleClearCart = () => {
     dispatch(clearItemFromCart());
   };
-
-  const removeItem = (itemId) => {
-    dispatch(removeItemFromCart(itemId));
-  };
-
-  const incrementHandler = (itemId) => {
-    dispatch(increaseQuantity(itemId));
-  };
-
   return (
     <div>
-      <h1 style={style}>Cart Items</h1>
-      <button onClick={() => handleClearCart()}>Clear Cart</button>
-      <h2>{cartItems.length}</h2>
-
-      <div style={style2}>
-        {cartItems.map((item) => (
-          <div key={item.card?.info?.id}>
-            <FootItem
-              name={item.card?.info?.name}
-              price={item.card?.info?.price}
-              imageId={item.card?.info?.imageId}
-            />
-            <h2>ID: {item.card?.info?.id}</h2>
-            <button
-              onClick={() => removeItem(item.card?.info?.id)}
-              // onClick={clearItemHandler(item.card?.info?.id)}
-            >
-              Remove &#10006;
-            </button>
-
-            <button onClick={() => incrementHandler(item.card?.info?.id)}>
-              {" "}
-              Increase +{" "}
-            </button>
-            <button> Decrease - </button>
-          </div>
-        ))}
+      <div className="flex justify-center">
+        <h1 className="m-2 text-center text-lg font-bold p-3">
+          Cart Items - {cartItems.length}
+        </h1>
+        <button
+          onClick={() => handleClearCart()}
+          className="px-2  m-2 text-lg font-bold text-red-700 bg-slate-500 rounded-lg"
+        >
+          ✖ Clear Cart
+        </button>
       </div>
+      {cartItems.map((itemss) => (
+        <FoodItem key={itemss.id} {...itemss} />
+      ))}
     </div>
   );
 };

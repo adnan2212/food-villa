@@ -1,11 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 export const CART_INITIAL_STATE = {
   cartItems: [],
 };
-
-// const addItemToCart = (state, action) => {};
-// const removeCartItem = (cartItems, cartItemToRemove) => {};
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -15,13 +12,17 @@ export const cartSlice = createSlice({
       state.cartItems.push(action.payload);
     },
 
+    showCartItems(state, action) {
+      console.log("Action: " + action.payload);
+      console.log("cart items: ", state.cartItems);
+    },
+
     removeItemFromCart(state, action) {
-      console.log(action);
       const itemId = action.payload;
-      state.cartItems = state.cartItems.filter(
-        (cartItem) => cartItem.id !== itemId
-      );
-      state.cartItems.length--;
+
+      const updatedItems = state.cartItems.filter((item) => item.id !== itemId);
+      console.log("UPDATED ITEMS", updatedItems);
+      return { ...state, cartItems: updatedItems };
     },
 
     clearItemFromCart(state, action) {
@@ -33,7 +34,7 @@ export const cartSlice = createSlice({
 export const {
   addItemToCart,
   removeItemFromCart,
-  increaseQuantity,
+  showCartItems,
   clearItemFromCart,
 } = cartSlice.actions;
 

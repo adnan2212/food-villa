@@ -10,11 +10,12 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import RestrauntMenu from "./components/RestrauntMenu";
 import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 import Error from "./components/Error";
 import Profile from "./components/Profile";
 import Shimmer from "./components/shimmer";
-// import Instamart from "./components/Instamart";
 import store from "./store/store";
+// import Instamart from "./components/Instamart";
 
 //lazy loading
 const Instamart = lazy(() => import("./components/Instamart")); //Dynamic Import
