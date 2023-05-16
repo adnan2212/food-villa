@@ -10,12 +10,15 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import RestrauntMenu from "./components/RestrauntMenu";
 import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
 import Error from "./components/Error";
 import Profile from "./components/Profile";
 import Shimmer from "./components/shimmer";
 import store from "./store/store";
+import { ToastContainer } from "react-toastify";
+import FoodItem from "./components/FoodItem";
 // import Instamart from "./components/Instamart";
+
+import "react-toastify/dist/ReactToastify.css";
 
 //lazy loading
 const Instamart = lazy(() => import("./components/Instamart")); //Dynamic Import
@@ -23,6 +26,7 @@ const Instamart = lazy(() => import("./components/Instamart")); //Dynamic Import
 const App = () => {
   return (
     <Provider store={store}>
+      <ToastContainer />
       <Header />
       <Outlet />
       <Footer />
