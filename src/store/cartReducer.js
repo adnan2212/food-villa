@@ -15,7 +15,6 @@ export const cartSlice = createSlice({
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log("FROM ADD CART ITEM: ", itemIndex);
 
       if (itemIndex >= 0) {
         state.cartItems[itemIndex].quantity += 1;
@@ -41,18 +40,14 @@ export const cartSlice = createSlice({
         position: "bottom-left",
       });
       const updatedItems = state.cartItems.filter((item) => item.id !== itemId);
-      console.log("UPDATED ITEMS", updatedItems);
 
       return { ...state, cartItems: updatedItems };
     },
 
     decreaseItemFromCart(state, action) {
-      console.log("Action ITEMS", action.payload);
-
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log("CART ITEM INDEX: ", state.cartItems[itemIndex]);
 
       if (state.cartItems[itemIndex].quantity === 1) {
         toast.error(`${action.payload.name} removed from cart.`, {
@@ -61,7 +56,6 @@ export const cartSlice = createSlice({
         const updatedItems = state.cartItems.filter(
           (item) => item.id !== action.payload.id
         );
-        console.log("UPDATED ITEMS", updatedItems);
 
         return { ...state, cartItems: updatedItems };
       } else {
@@ -76,12 +70,9 @@ export const cartSlice = createSlice({
     },
 
     increaseItemFromCart(state, action) {
-      console.log("Action ITEMS", action.payload);
-
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log("CART ITEM INDEX: ", state.cartItems[itemIndex]);
 
       state.cartItems[itemIndex].quantity += 1;
       toast.info(
