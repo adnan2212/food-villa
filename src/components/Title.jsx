@@ -4,7 +4,7 @@ import logo from "../assets/img/SwiggyLogo.webp";
 const Title = () => {
   return (
     <a href="/">
-      <img className="logo" src={logo} alt="logo" />
+      <img data-testid="logo" className="logo" src={logo} alt="logo" />
     </a>
   );
 };

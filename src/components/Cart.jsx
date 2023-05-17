@@ -8,7 +8,6 @@ import DeleteForeverFilled from "@ricons/material/DeleteForeverFilled";
 
 import FoodItem from "./FoodItem";
 import { clearItemFromCart, getTotals } from "../store/cartReducer";
-import { getTotals } from "../store/cartReducer";
 
 const Cart = () => {
   const cart = useSelector((store) => store.cart);

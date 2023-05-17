@@ -15,7 +15,6 @@ import Profile from "./components/Profile";
 import Shimmer from "./components/shimmer";
 import store from "./store/store";
 import { ToastContainer } from "react-toastify";
-import FoodItem from "./components/FoodItem";
 // import Instamart from "./components/Instamart";
 
 import "react-toastify/dist/ReactToastify.css";

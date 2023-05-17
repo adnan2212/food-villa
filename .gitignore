@@ -3,4 +3,5 @@ dist/
 .DS_Store
 .env
 .parcel-cache
+/coverage
 Notes.txt

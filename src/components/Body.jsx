@@ -74,6 +74,7 @@ const Body = () => {
     <>
       <div className="search-container">
         <input
+          data-testid="search-input"
           type="text"
           className="search-input"
           placeholder="Search a restaurant you want..."
@@ -81,7 +82,11 @@ const Body = () => {
           onChange={onChangeHandler}
         />
 
-        <button className="search-btn" onClick={onClickHandler}>
+        <button
+          data-testid="search-btn"
+          className="search-btn"
+          onClick={onClickHandler}
+        >
           Search
         </button>
 
@@ -99,7 +104,7 @@ const Body = () => {
       {filteredRestraunts?.length === 0 ? (
         <Shimmer />
       ) : (
-        <div className="restraunt-list">
+        <div className="restraunt-list" data-testid="res-list">
           {filteredRestraunts.map((restraunt) => {
             return (
               <Link

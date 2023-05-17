@@ -8,7 +8,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const cartItems = useSelector((store) => store.cart.cartItems);
-  console.log("Cart Item Array: ", cartItems);
+  // console.log("Cart Item Array: ", cartItems);
 
   return (
     <div className="header">
@@ -45,7 +45,7 @@ const Header = () => {
           <li>
             <Link to="/cart">
               <i className="fa-solid fa-cart-shopping"></i>
-              <span>IN CART: {cartItems?.length}</span>
+              <span data-testid="cart">IN CART: {cartItems?.length}</span>
             </Link>
           </li>
         </ul>

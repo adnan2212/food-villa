@@ -56,7 +56,7 @@ const CardShimmer = () => {
 
 const Shimmer = () => {
   return (
-    <div className="shimmer-container">
+    <div className="shimmer-container" data-testid="shimmer">
       {new Array(shimmer_card_unit).fill(0).map((element, index) => {
         return <CardShimmer key={index} />;
       })}

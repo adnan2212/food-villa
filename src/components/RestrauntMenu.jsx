@@ -60,7 +60,7 @@ const RestaurantMenu = () => {
               {restaurantMenu?.card?.itemCards?.length} ITEMS
             </p>
           </div>
-          <div className="menu-items-list">
+          <div className="menu-items-list" data-testid="menu">
             {(restaurantMenu?.card?.itemCards).map((item) => (
               <div className="menu-item" key={item.card.info.id}>
                 <div className="menu-item-details">
@@ -83,7 +83,11 @@ const RestaurantMenu = () => {
                       alt={item.card.info.name}
                     />
                   )}
-                  <button className="add-btn" onClick={() => addFoodItem(item)}>
+                  <button
+                    data-testid="add-btn"
+                    className="add-btn"
+                    onClick={() => addFoodItem(item)}
+                  >
                     {" "}
                     ADD +
                   </button>
